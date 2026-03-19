@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 A Special Place for Us</title>
+    <!-- We'll keep the styling inline here for this simple, standalone password page -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #F8E1E7 0%, #E8DFF5 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Lato', sans-serif; /* Fallback, but linking Google Fonts is better */
+            overflow: hidden; /* Prevent scroll on password page */
+        }
+        
+        /* Basic font linking for a better look */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap');
+        
+        h1, .subtitle, .hint, .error-message, .unlock-btn, .password-input {
+            font-family: 'Lato', sans-serif; /* Default to Lato */
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif; /* Override for heading */
+        }
+
+        .password-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(192, 77, 110, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .heart-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        h1 {
+            color: #C04D6E;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #888;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #F8E1E7;
+            border-radius: 50px;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .password-input:focus {
+            border-color: #C04D6E;
+            box-shadow: 0 0 20px rgba(192, 77, 110, 0.2);
+        }
+        
+        .unlock-btn {
+            background: linear-gradient(135deg, #C04D6E 0%, #E8789A 100%);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            border-radius: 50px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .unlock-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(192, 77, 110, 0.4);
+        }
+        
+        .hint {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #aaa;
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* Shake animation for incorrect password */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="password-container">
+        <div class="heart-icon">💕</div>
+        <h1>Welcome, My Love</h1>
+        <p class="subtitle">Enter our special password</p>
+        
+        <input type="password" 
+               class="password-input" 
+               id="passwordInput" 
+               placeholder="Enter password..."
+               onkeypress="handleKeyPress(event)">
+        
+        <button class="unlock-btn" onclick="checkPassword()">
+            Unlock Our Story ✨
+        </button>
+        
+        <p class="hint">Hint: The date we first met 💑 (DDMMYYYY)</p>
+        <p class="error-message" id="errorMsg">That's not it, try again! 💔</p>
+    </div>
+
+    <!-- Password handling script -->
+    <script src="js/password.js"></script>
+</body>
+</html>
