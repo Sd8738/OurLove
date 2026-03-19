@@ -171,16 +171,20 @@ class LoveStoryApp {
     }
 
     setupLetter() {
-        const envelope = document.getElementById('letterEnvelope');
+        // Letter opener is handled by toggleLetter() in home.html via onclick attribute.
+        // This function is intentionally minimal to avoid double-binding.
         const paper = document.getElementById('letterPaper');
-        
+        const envelope = document.getElementById('letterEnvelope');
         if (envelope && paper) {
-            envelope.addEventListener('click', () => {
-                envelope.classList.add('opened');
-                setTimeout(() => {
-                    paper.classList.add('visible');
-                }, 600);
-            });
+            // Override the inline toggleLetter to also reveal the paper
+            window.toggleLetter = function() {
+                envelope.classList.toggle('opened');
+                if (envelope.classList.contains('opened')) {
+                    setTimeout(() => { paper.classList.add('visible'); }, 600);
+                } else {
+                    paper.classList.remove('visible');
+                }
+            };
         }
     }
 

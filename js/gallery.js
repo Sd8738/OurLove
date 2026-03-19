@@ -35,13 +35,12 @@ class Gallery {
 
         grid.innerHTML = photos.map((photo, index) => `
             <div class="gallery-item animate-on-scroll" data-index="${index}" data-id="${photo.id}">
-                <div class="gallery-item-inner">
-                    <img src="${photo.data}" alt="${photo.caption}" loading="lazy">
-                    <div class="gallery-item-overlay">
-                        <p class="gallery-item-caption">${photo.caption || ''}</p>
-                        ${photo.favorite ? '<span class="gallery-item-favorite">❤️</span>' : ''}
-                    </div>
+                <img src="${photo.data}" alt="${photo.caption || ''}" loading="lazy">
+                <div class="gallery-overlay">
+                    <p class="gallery-overlay-text">${photo.caption || ''}</p>
+                    <p class="gallery-overlay-date">${photo.date ? new Date(photo.date).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) : ''}</p>
                 </div>
+                ${photo.favorite ? '<span class="fav-badge">❤️</span>' : ''}
             </div>
         `).join('');
 
@@ -204,10 +203,12 @@ class VideoGallery {
             <div class="video-card animate-on-scroll" data-index="${index}">
                 <div class="video-thumbnail">
                     <video src="${video.data}" muted preload="metadata"></video>
-                    <div class="video-play-btn">▶</div>
+                    <div class="play-overlay">
+                        <div class="play-icon">▶</div>
+                    </div>
                 </div>
                 <div class="video-info">
-                    <h4>${video.caption || 'Untitled'}</h4>
+                    <h3>${video.caption || 'Untitled'}</h3>
                     <p>${this.formatDate(video.date)}</p>
                 </div>
             </div>

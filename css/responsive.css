@@ -14,7 +14,7 @@
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    padding: var(--spacing-md);
+    padding: var(--sp-md);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -25,13 +25,13 @@
 }
 
 .nav-links li {
-    margin: var(--spacing-sm) 0;
+    margin: var(--sp-sm) 0;
     text-align: center;
 }
 
 .nav-links a {
     font-size: 18px;
-    padding: var(--spacing-sm);
+    padding: var(--sp-sm);
     display: block;
 }
 
@@ -43,7 +43,7 @@
     font-size: 28px;
     cursor: pointer;
     color: var(--deep-rose);
-    padding: var(--spacing-sm);
+    padding: var(--sp-sm);
     /* Make it easier to tap */
 }
 
@@ -63,17 +63,17 @@
 
 .hero-subtitle {
     font-size: 24px;
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--sp-md);
 }
 
 .section-title {
     font-size: 32px;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--sp-xl);
 }
 
 /* Timeline - Single column on mobile */
 .timeline::before {
-    left: var(--spacing-md);
+    left: var(--sp-md);
     /* Move line to left */
 }
 
@@ -82,16 +82,16 @@
     /* Both sides become single column */
     width: 100%;
     margin-left: 0;
-    padding-left: calc(var(--spacing-md) + var(--spacing-lg));
+    padding-left: calc(var(--sp-md) + var(--sp-lg));
     /* Space for dot + padding */
-    padding-right: var(--spacing-md);
+    padding-right: var(--sp-md);
     justify-content: flex-start;
     /* Always align left */
 }
 
 .timeline-item::after {
     /* Adjust dot position for single column */
-    left: calc(var(--spacing-md) - 15px);
+    left: calc(var(--sp-md) - 15px);
     /* Align dot with the line */
 }
 
@@ -103,29 +103,29 @@
 .timeline-content {
     max-width: 100%;
     /* Take full width */
-    padding: var(--spacing-md);
+    padding: var(--sp-md);
 }
 
 /* Gallery - 2 columns on mobile */
 .gallery-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     /* Smaller min-width */
-    gap: var(--spacing-md);
-    padding: 0 var(--spacing-md);
+    gap: var(--sp-md);
+    padding: 0 var(--sp-md);
 }
 
 .gallery-overlay {
     opacity: 1;
     /* Always visible on touch devices */
     transform: translateY(0);
-    padding: var(--spacing-sm) var(--spacing-xs);
+    padding: var(--sp-sm) var(--sp-xs);
     font-size: 16px;
 }
 
 /* Video Gallery - 1 or 2 columns on mobile */
 .video-gallery {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: var(--spacing-md);
+    gap: var(--sp-md);
 }
 
 .video-info h3 {
@@ -144,13 +144,13 @@
 
 /* Music Player */
 .music-player {
-    bottom: var(--spacing-md);
-    right: var(--spacing-md);
-    left: var(--spacing-md);
+    bottom: var(--sp-md);
+    right: var(--sp-md);
+    left: var(--sp-md);
     /* Make it full width on mobile */
     justify-content: center;
-    padding: var(--spacing-sm);
-    gap: var(--spacing-md);
+    padding: var(--sp-sm);
+    gap: var(--sp-md);
 }
 
 .music-player .play-btn {
@@ -196,11 +196,11 @@
 
 .lightbox-caption {
     font-size: 18px;
-    margin: var(--spacing-sm) 0;
+    margin: var(--sp-sm) 0;
 }
 
 .lightbox-counter {
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--sp-sm);
 }
 
 /* --- Tablet Styles --- */
