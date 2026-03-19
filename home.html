@@ -1,16 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 Our Love Story</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>💕 Our Love Story — Sumant & Akshaya</title>
+    <meta name="description"
+        content="A beautiful, private space to celebrate our love, memories, and journey together.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* Inline enhancements for the page */
+
+        /* Rose petal background for light sections */
+        .petal-light {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .mini-petal {
+            position: absolute;
+            font-size: 12px;
+            opacity: 0;
+            animation: miniPetalFloat linear infinite;
+        }
+
+        @keyframes miniPetalFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 0.35;
+            }
+
+            95% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(560deg);
+                opacity: 0;
+            }
+        }
+
+        /* Hero particles (small floating sparkles/hearts) */
+        .hero-sparkle {
+            position: absolute;
+            pointer-events: none;
+            font-size: var(--s, 16px);
+            animation: sparkleUp var(--d, 8s) ease-in-out var(--dl, 0s) infinite;
+            opacity: 0;
+        }
+
+        @keyframes sparkleUp {
+            0% {
+                transform: translateY(40px) scale(0);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.7;
+                transform: translateY(0) scale(1);
+            }
+
+            80% {
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: translateY(-100px) scale(0.4);
+                opacity: 0;
+            }
+        }
+
+        /* Romantic quote section */
+        .quote-section {
+            padding: 60px var(--sp-lg);
+            background: linear-gradient(135deg, #3d0c20 0%, #1a0a10 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(232, 84, 122, 0.1) 0%, transparent 70%);
+        }
+
+        .quote-carousel {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .big-quote {
+            font-size: 60px;
+            line-height: 1;
+            color: rgba(232, 84, 122, 0.3);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: -20px;
+        }
+
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(22px, 3.5vw, 30px);
+            font-style: italic;
+            color: rgba(255, 214, 224, 0.9);
+            line-height: 1.5;
+            transition: opacity 0.6s ease;
+        }
+
+        .quote-attr {
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            color: rgba(255, 182, 193, 0.5);
+            margin-top: 16px;
+            transition: opacity 0.6s ease;
+        }
+
+        .quote-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 28px;
+        }
+
+        .q-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(232, 84, 122, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .q-dot.active {
+            background: var(--rose);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Decorative vines/roses on section transitions */
+        .section-deco {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 22px;
+            opacity: 0.6;
+            letter-spacing: 6px;
+            pointer-events: none;
+        }
+
+        /* Letters section two column fix */
+        @media (max-width: 700px) {
+            .letters-container {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <!-- Loading Screen -->
+
+    <!-- ===== LOADING SCREEN ===== -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
             <div class="loading-heart">💕</div>
@@ -21,53 +184,68 @@
         </div>
     </div>
 
-    <!-- Cursor Effects -->
+    <!-- ===== CURSOR HEART ===== -->
     <div class="cursor-heart" id="cursorHeart">💕</div>
 
-    <!-- Background Elements -->
-    <div class="background-effects">
-        <div class="gradient-bg"></div>
-        <div class="particles" id="particles"></div>
-        <div class="floating-elements" id="floatingElements"></div>
+    <!-- ===== FLOATING PETALS BACKGROUND ===== -->
+    <div class="petal-layer" id="petalLayer">
+        <div class="petal" style="--drift:55px">🌸</div>
+        <div class="petal" style="--drift:-45px">🌹</div>
+        <div class="petal" style="--drift:70px">🌺</div>
+        <div class="petal" style="--drift:-30px">💮</div>
+        <div class="petal" style="--drift:40px">🌸</div>
+        <div class="petal" style="--drift:-60px">🌹</div>
+        <div class="petal" style="--drift:25px">🌸</div>
+        <div class="petal" style="--drift:-50px">🌺</div>
+        <div class="petal" style="--drift:65px">💮</div>
+        <div class="petal" style="--drift:-35px">🌸</div>
+        <div class="petal" style="--drift:50px">🌹</div>
+        <div class="petal" style="--drift:-20px">🌸</div>
+        <div class="petal" style="--drift:30px">🌺</div>
     </div>
 
-    <!-- Navigation -->
+    <!-- ===== NAVIGATION ===== -->
     <nav class="nav" id="navbar">
         <div class="nav-logo">
             <span class="logo-icon">💕</span>
             <span class="logo-text" id="navLogoText">Us</span>
         </div>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#home" class="nav-link active">Home</a></li>
-            <li><a href="#story" class="nav-link">Our Story</a></li>
-            <li><a href="#gallery" class="nav-link">Gallery</a></li>
-            <li><a href="#videos" class="nav-link">Videos</a></li>
-            <li><a href="#letters" class="nav-link">Love Notes</a></li>
+            <li><a href="#home" class="nav-link active" id="nl-home">Home</a></li>
+            <li><a href="#story" class="nav-link" id="nl-story">Our Story</a></li>
+            <li><a href="#gallery" class="nav-link" id="nl-gallery">Gallery</a></li>
+            <li><a href="#videos" class="nav-link" id="nl-videos">Videos</a></li>
+            <li><a href="#letters" class="nav-link" id="nl-letters">Love Notes</a></li>
         </ul>
-        <button class="nav-toggle" id="navToggle">
-            <span></span>
-            <span></span>
-            <span></span>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
         </button>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ===== HERO SECTION ===== -->
     <section class="hero" id="home">
         <div class="hero-background">
             <div class="hero-gradient"></div>
-            <div class="hero-particles"></div>
+            <div class="hero-particles" id="heroParticles">
+                <!-- Hero sparkles injected by JS -->
+            </div>
         </div>
-        
-        <div class="hero-content">
+
+        <div class="hero-content reveal">
             <div class="hero-badge">💕 Our Love Story 💕</div>
-            <h1 class="hero-title" id="coupleNames">Sumant & Akshaya</h1>
+
+            <h1 class="hero-title" id="coupleNames">Sumant &amp; Akshaya</h1>
+
             <div class="hero-divider">
                 <span class="divider-line"></span>
                 <span class="divider-heart">❤️</span>
                 <span class="divider-line"></span>
             </div>
-            <p class="hero-quote" id="heroQuote">"Every love story is beautiful, but ours is my favorite"</p>
-            
+
+            <p class="hero-quote" id="heroQuote">
+                "Every love story is beautiful, but ours is my favorite"
+            </p>
+
             <div class="love-counter">
                 <div class="counter-label">Together for</div>
                 <div class="counter-numbers">
@@ -85,6 +263,11 @@
                         <span class="counter-value" id="counterMinutes">0</span>
                         <span class="counter-unit">Minutes</span>
                     </div>
+                    <div class="counter-separator">:</div>
+                    <div class="counter-item">
+                        <span class="counter-value" id="counterSeconds">0</span>
+                        <span class="counter-unit">Seconds</span>
+                    </div>
                 </div>
                 <div class="counter-hearts">💕💕💕</div>
             </div>
@@ -93,83 +276,115 @@
         <div class="scroll-indicator">
             <span class="scroll-text">Scroll to explore</span>
             <div class="scroll-arrow">
-                <span></span>
-                <span></span>
+                <span></span><span></span>
             </div>
         </div>
     </section>
 
-    <!-- Our Story Timeline -->
+    <!-- ===== ROMANTIC QUOTES ===== -->
+    <div class="quote-section">
+        <div class="quote-carousel">
+            <div class="big-quote">"</div>
+            <p class="quote-text" id="quoteText">In all the world, there is no heart for me like yours.</p>
+            <p class="quote-attr" id="quoteAttr">— Maya Angelou</p>
+            <div class="quote-dots" id="quoteDots"></div>
+        </div>
+    </div>
+
+    <!-- ===== STORY TIMELINE ===== -->
     <section class="story-section" id="story">
-        <div class="section-header">
+        <div class="petal-light" id="storyPetals"></div>
+        <div class="section-header reveal">
             <span class="section-badge">📖</span>
             <h2 class="section-title">Our Journey Together</h2>
             <p class="section-subtitle">Every moment with you is a treasure</p>
         </div>
+        <div class="ornament">
+            <span class="ornament-line"></span>
+            <span class="ornament-heart">🌹</span>
+            <span class="ornament-line"></span>
+        </div>
 
         <div class="timeline" id="timeline">
-            <!-- Timeline items will be loaded dynamically -->
-            <div class="timeline-placeholder">
+            <div class="timeline-placeholder reveal">
                 <div class="placeholder-icon">📅</div>
                 <p>Your beautiful timeline will appear here</p>
-                <small>Add photos with dates to create your story</small>
+                <small
+                    style="color:#a07080; font-family:'Dancing Script',cursive; font-size:16px; margin-top:8px; display:block">Add
+                    photos with dates to create your story</small>
             </div>
         </div>
     </section>
 
-    <!-- Photo Gallery -->
+    <!-- ===== GALLERY ===== -->
     <section class="gallery-section" id="gallery">
-        <div class="section-header">
+        <div class="section-header reveal">
             <span class="section-badge">📸</span>
             <h2 class="section-title">Our Beautiful Memories</h2>
             <p class="section-subtitle">Captured moments of our love</p>
         </div>
+        <div class="ornament">
+            <span class="ornament-line"></span>
+            <span class="ornament-heart">💕</span>
+            <span class="ornament-line"></span>
+        </div>
 
-        <div class="gallery-filters">
+        <div class="gallery-filters reveal">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="recent">Recent</button>
             <button class="filter-btn" data-filter="favorites">Favorites ❤️</button>
         </div>
 
         <div class="gallery-grid" id="galleryGrid">
-            <!-- Photos will be loaded dynamically -->
             <div class="gallery-placeholder">
                 <div class="placeholder-icon">📷</div>
-                <p>No photos yet!</p>
+                <p style="color:#a07080; margin-top:8px">No photos yet!</p>
                 <a href="admin.html" class="placeholder-btn">Upload Photos</a>
             </div>
         </div>
     </section>
 
-    <!-- Video Section -->
+    <!-- ===== VIDEOS ===== -->
     <section class="videos-section" id="videos">
-        <div class="section-header light">
+        <div class="section-header light reveal">
             <span class="section-badge">🎬</span>
             <h2 class="section-title">Video Memories</h2>
             <p class="section-subtitle">Relive our special moments</p>
         </div>
+        <div class="ornament" style="--ornament-color: rgba(255,182,193,0.3)">
+            <span class="ornament-line"
+                style="background: linear-gradient(to right, transparent, rgba(255,182,193,0.25), transparent)"></span>
+            <span class="ornament-heart" style="color:rgba(255,182,193,0.6)">🎞️</span>
+            <span class="ornament-line"
+                style="background: linear-gradient(to left, transparent, rgba(255,182,193,0.25), transparent)"></span>
+        </div>
 
         <div class="videos-grid" id="videosGrid">
-            <!-- Videos will be loaded dynamically -->
-            <div class="video-placeholder">
+            <div class="video-placeholder" style="text-align:center; padding:60px 20px; color:rgba(255,182,193,0.4)">
                 <div class="placeholder-icon">🎥</div>
-                <p>No videos yet!</p>
-                <a href="admin.html" class="placeholder-btn">Upload Videos</a>
+                <p style="margin-top:8px">No videos yet!</p>
+                <a href="admin.html" class="placeholder-btn" style="margin-top:16px">Upload Videos</a>
             </div>
         </div>
     </section>
 
-    <!-- Love Letters Section -->
+    <!-- ===== LOVE LETTERS ===== -->
     <section class="letters-section" id="letters">
-        <div class="section-header">
+        <div class="section-header reveal">
             <span class="section-badge">💌</span>
             <h2 class="section-title">Love Notes</h2>
             <p class="section-subtitle">Words from my heart to yours</p>
         </div>
+        <div class="ornament">
+            <span class="ornament-line"></span>
+            <span class="ornament-heart">💌</span>
+            <span class="ornament-line"></span>
+        </div>
 
         <div class="letters-container">
-            <div class="main-letter">
-                <div class="letter-envelope" id="letterEnvelope">
+            <!-- Envelope -->
+            <div class="main-letter reveal-left">
+                <div class="letter-envelope" id="letterEnvelope" onclick="toggleLetter()">
                     <div class="envelope-back"></div>
                     <div class="envelope-front">
                         <div class="envelope-heart">💌</div>
@@ -177,77 +392,107 @@
                     </div>
                     <div class="envelope-flap"></div>
                 </div>
-
-                <div class="letter-paper" id="letterPaper">
-                    <div class="letter-content">
-                        <p class="letter-greeting">My Dearest Love,</p>
-                        <div class="letter-body" id="letterBody">
-                            <p>Every moment with you feels like a beautiful dream I never want to wake up from. You are my sunshine on cloudy days, my calm in every storm, and my favorite adventure.</p>
-                            <p>This website is a small token of my love — a place where our memories live forever, where every photo tells our story, and every video captures our laughter.</p>
-                            <p>Thank you for being you. Thank you for loving me. Thank you for making every day brighter just by being in it.</p>
-                        </div>
-                        <p class="letter-signature">
-                            Forever & Always,<br>
-                            <span id="letterSignature">Your Love</span> 💕
-                        </p>
-                    </div>
-                </div>
             </div>
 
-            <!-- Quick Love Notes -->
-            <div class="love-notes-carousel" id="loveNotesCarousel">
-                <!-- Dynamic love notes -->
+            <!-- Letter Paper -->
+            <div class="letter-paper reveal-right" id="letterPaper">
+                <div class="letter-content">
+                    <p class="letter-greeting" id="letterGreeting">My Dearest Love,</p>
+                    <div class="letter-body" id="letterBody">
+                        <p>Every moment with you feels like a beautiful dream I never want to wake up from. You are my
+                            sunshine on cloudy days, my calm in every storm, and my favorite adventure.</p>
+                        <p>This website is a small token of my love — a place where our memories live forever, where
+                            every photo tells our story, and every video captures our laughter.</p>
+                        <p>Thank you for being you. Thank you for loving me. Thank you for making every day brighter
+                            just by being in it.</p>
+                    </div>
+                    <p class="letter-signature">
+                        Forever &amp; Always,<br>
+                        <span id="letterSignature">Your Love</span> 💕
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Love Notes -->
+        <div class="love-notes-carousel" id="loveNotesCarousel" style="margin-top:50px">
+            <div class="love-note">
+                <div class="love-note-icon">🌹</div>
+                <p class="love-note-text">"You make my heart smile in ways I never thought possible."</p>
+                <p class="love-note-date">With all my love</p>
+            </div>
+            <div class="love-note">
+                <div class="love-note-icon">✨</div>
+                <p class="love-note-text">"Every day with you is the best day of my life. And tomorrow will be even
+                    better."</p>
+                <p class="love-note-date">Always yours</p>
+            </div>
+            <div class="love-note">
+                <div class="love-note-icon">💫</div>
+                <p class="love-note-text">"I love you more than words could ever express, but I will spend my whole life
+                    trying."</p>
+                <p class="love-note-date">Forever &amp; always</p>
+            </div>
+            <div class="love-note">
+                <div class="love-note-icon">🦋</div>
+                <p class="love-note-text">"Falling in love with you was the easiest thing I have ever done."</p>
+                <p class="love-note-date">With love</p>
             </div>
         </div>
     </section>
 
-    <!-- Special Dates Section -->
+    <!-- ===== SPECIAL DATES ===== -->
     <section class="special-dates-section" id="specialDates">
-        <div class="section-header light">
+        <div class="section-header light reveal">
             <span class="section-badge">🎉</span>
             <h2 class="section-title">Special Days</h2>
             <p class="section-subtitle">Counting down to our celebrations</p>
         </div>
-
-        <div class="dates-grid" id="datesGrid">
-            <!-- Special dates will be loaded dynamically -->
+        <div class="ornament">
+            <span class="ornament-line"
+                style="background: linear-gradient(to right, transparent, rgba(245,200,66,0.3), transparent)"></span>
+            <span class="ornament-heart" style="font-size:18px">🎊</span>
+            <span class="ornament-line"
+                style="background: linear-gradient(to left, transparent, rgba(245,200,66,0.3), transparent)"></span>
         </div>
+        <div class="dates-grid" id="datesGrid"></div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-hearts">💕💖💕</div>
-            <p class="footer-text">Made with all my love, for you</p>
-            <p class="footer-stats" id="footerStats"></p>
-        </div>
+        <div class="footer-hearts">💕💖💕</div>
+        <p class="footer-text">Made with all my love, for you ✨</p>
+        <p class="footer-stats" id="footerStats"></p>
+        <p
+            style="margin-top:20px; font-size:12px; color:rgba(255,182,193,0.2); font-family:'Dancing Script',cursive; font-size:15px;">
+            Every pixel of this page was made with love 🌹
+        </p>
     </footer>
 
-    <!-- Music Player -->
+    <!-- ===== MUSIC PLAYER ===== -->
     <div class="music-player" id="musicPlayer">
-        <button class="music-btn" id="musicBtn">
-            <span class="music-icon">🎵</span>
+        <button class="music-btn" id="musicBtn" aria-label="Play music">
+            <span class="music-icon" id="musicIcon">🎵</span>
         </button>
         <div class="music-info">
             <div class="music-title" id="musicTitle">Our Song</div>
-            <div class="music-artist" id="musicArtist">Playing</div>
+            <div class="music-artist" id="musicArtist">Playing ♪</div>
         </div>
         <div class="music-visualizer" id="musicVisualizer">
             <span></span><span></span><span></span><span></span><span></span>
         </div>
     </div>
-
     <audio id="bgMusic" loop>
         <source src="assets/audio/song.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Lightbox -->
+    <!-- ===== LIGHTBOX ===== -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-overlay"></div>
         <div class="lightbox-content">
-            <button class="lightbox-close">&times;</button>
-            <button class="lightbox-prev">❮</button>
-            <button class="lightbox-next">❯</button>
+            <button class="lightbox-close" aria-label="Close">×</button>
+            <button class="lightbox-prev" aria-label="Previous">❮</button>
+            <button class="lightbox-next" aria-label="Next">❯</button>
             <div class="lightbox-image-container">
                 <img src="" alt="" class="lightbox-image" id="lightboxImage">
             </div>
@@ -260,10 +505,10 @@
         </div>
     </div>
 
-    <!-- Video Modal -->
+    <!-- ===== VIDEO MODAL ===== -->
     <div class="video-modal" id="videoModal">
         <div class="video-modal-content">
-            <button class="video-modal-close">&times;</button>
+            <button class="video-modal-close" aria-label="Close">×</button>
             <h3 class="video-modal-title" id="videoModalTitle"></h3>
             <video id="videoPlayer" controls playsinline>
                 <source src="" type="video/mp4">
@@ -271,13 +516,160 @@
         </div>
     </div>
 
-    <!-- Toast Notifications -->
+    <!-- ===== TOAST ===== -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- Scripts -->
+    <!-- ===== SCRIPTS ===== -->
     <script src="js/storage.js"></script>
     <script src="js/effects.js"></script>
     <script src="js/gallery.js"></script>
     <script src="js/app.js"></script>
+
+    <script>
+        // ===== EXTRA ROMANTIC JS =====
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+            // Active nav link tracking
+            const sections = ['home', 'story', 'gallery', 'videos', 'letters', 'specialDates'];
+            sections.forEach(id => {
+                const el = document.getElementById(id) || document.querySelector('#' + id);
+                const link = document.getElementById('nl-' + id.replace('specialDates', 'letters'));
+                if (!el || !link) return;
+                const rect = el.getBoundingClientRect();
+                if (rect.top < 200 && rect.bottom > 200) {
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle?.addEventListener('click', () => navLinks.classList.toggle('open'));
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        // Hero sparkles / particles
+        function createHeroSparkles() {
+            const container = document.getElementById('heroParticles');
+            if (!container) return;
+            const items = ['💕', '✦', '🌸', '💫', '✨', '❤️', '🌹', '💖'];
+            for (let i = 0; i < 22; i++) {
+                const el = document.createElement('div');
+                el.className = 'hero-sparkle';
+                el.textContent = items[i % items.length];
+                el.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    bottom: ${5 + Math.random() * 40}%;
+                    --s: ${10 + Math.random() * 18}px;
+                    --d: ${6 + Math.random() * 10}s;
+                    --dl: ${Math.random() * 8}s;
+                `;
+                container.appendChild(el);
+            }
+        }
+
+        // Section reveal on scroll
+        function initReveal() {
+            const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        // stagger children
+                        const children = e.target.querySelectorAll('.timeline-item, .gallery-item, .video-card, .date-card');
+                        children.forEach((c, i) => {
+                            c.style.transitionDelay = `${i * 0.12}s`;
+                            c.classList.add('visible');
+                        });
+                    }
+                });
+            }, { threshold: 0.12 });
+            els.forEach(el => observer.observe(el));
+        }
+
+        // Romantic quotes carousel
+        const quotesData = [
+            { text: "In all the world, there is no heart for me like yours.", attr: "— Maya Angelou" },
+            { text: "You are my sun, my moon, and all of my stars.", attr: "— e.e. cummings" },
+            { text: "I love you without knowing how, or when, or from where.", attr: "— Pablo Neruda" },
+            { text: "If I know what love is, it is because of you.", attr: "— Hermann Hesse" },
+            { text: "Two souls are sometimes created together and in love before they're born.", attr: "— F. Scott Fitzgerald" },
+        ];
+        let qIdx = 0;
+        function initQuotes() {
+            const dotsContainer = document.getElementById('quoteDots');
+            quotesData.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'q-dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => goToQuote(i));
+                dotsContainer.appendChild(dot);
+            });
+            setInterval(() => goToQuote((qIdx + 1) % quotesData.length), 5000);
+        }
+        function goToQuote(idx) {
+            const textEl = document.getElementById('quoteText');
+            const attrEl = document.getElementById('quoteAttr');
+            textEl.style.opacity = '0';
+            attrEl.style.opacity = '0';
+            setTimeout(() => {
+                qIdx = idx;
+                textEl.textContent = quotesData[qIdx].text;
+                attrEl.textContent = quotesData[qIdx].attr;
+                textEl.style.opacity = '1';
+                attrEl.style.opacity = '1';
+                document.querySelectorAll('.q-dot').forEach((d, i) => d.classList.toggle('active', i === qIdx));
+            }, 400);
+        }
+
+        // Envelope toggle
+        function toggleLetter() {
+            const env = document.getElementById('letterEnvelope');
+            env.classList.toggle('opened');
+        }
+
+        // Cursor trail hearts
+        let lastTrail = 0;
+        document.addEventListener('mousemove', (e) => {
+            if (Date.now() - lastTrail < 120) return;
+            lastTrail = Date.now();
+            const el = document.createElement('div');
+            el.className = 'cursor-trail-heart';
+            el.textContent = Math.random() > 0.5 ? '💕' : '❤️';
+            el.style.left = e.clientX + 'px';
+            el.style.top = e.clientY + 'px';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 900);
+        });
+
+        // Seconds counter
+        function updateSeconds() {
+            const el = document.getElementById('counterSeconds');
+            if (el) {
+                const sec = new Date().getSeconds();
+                if (el.textContent !== String(sec)) {
+                    el.textContent = String(sec).padStart(2, '0');
+                    el.classList.add('updated');
+                    setTimeout(() => el.classList.remove('updated'), 400);
+                }
+            }
+        }
+        setInterval(updateSeconds, 1000);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createHeroSparkles();
+            initReveal();
+            initQuotes();
+            setTimeout(() => {
+                document.getElementById('loadingScreen')?.classList.add('hidden');
+            }, 2000);
+        });
+    </script>
 </body>
+
 </html>
