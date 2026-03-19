@@ -3,378 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Love Story 💕</title>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
-    
-    <!-- External CSS Files -->
+    <title>💕 Our Love Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body class="protected-content">
-    <!-- Floating Hearts Background -->
-    <div class="hearts-container">
-        <span class="floating-heart">💕</span>
-        <span class="floating-heart">❤️</span>
-        <span class="floating-heart">💗</span>
-        <span class="floating-heart">💖</span>
-        <span class="floating-heart">💝</span>
-        <span class="floating-heart">💕</span>
-        <span class="floating-heart">❤️</span>
-        <span class="floating-heart">💗</span>
-        <span class="floating-heart">💖</span>
-        <span class="floating-heart">💝</span>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-heart">💕</div>
+            <div class="loading-text">Loading our memories...</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cursor Effects -->
+    <div class="cursor-heart" id="cursorHeart">💕</div>
+
+    <!-- Background Elements -->
+    <div class="background-effects">
+        <div class="gradient-bg"></div>
+        <div class="particles" id="particles"></div>
+        <div class="floating-elements" id="floatingElements"></div>
     </div>
 
     <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-logo">Us 💕</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#timeline">Our Story</a></li>
-            <li><a href="#gallery">Memories</a></li>
-            <li><a href="#videos">Videos</a></li>
-            <li><a href="#letter">Love Letter</a></li>
+    <nav class="nav" id="navbar">
+        <div class="nav-logo">
+            <span class="logo-icon">💕</span>
+            <span class="logo-text" id="navLogoText">Us</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#story" class="nav-link">Our Story</a></li>
+            <li><a href="#gallery" class="nav-link">Gallery</a></li>
+            <li><a href="#videos" class="nav-link">Videos</a></li>
+            <li><a href="#letters" class="nav-link">Love Notes</a></li>
         </ul>
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="hero-particles"></div>
+        </div>
+        
         <div class="hero-content">
-            <h1 class="couple-names">Your Name & Her Name</h1> <!-- Customize your names -->
+            <div class="hero-badge">💕 Our Love Story 💕</div>
+            <h1 class="hero-title" id="coupleNames">Sumant & Akshaya</h1>
+            <div class="hero-divider">
+                <span class="divider-line"></span>
+                <span class="divider-heart">❤️</span>
+                <span class="divider-line"></span>
+            </div>
+            <p class="hero-quote" id="heroQuote">"Every love story is beautiful, but ours is my favorite"</p>
+            
             <div class="love-counter">
-                Together for <span id="daysTogether">0</span> days 💕
+                <div class="counter-label">Together for</div>
+                <div class="counter-numbers">
+                    <div class="counter-item">
+                        <span class="counter-value" id="counterDays">0</span>
+                        <span class="counter-unit">Days</span>
+                    </div>
+                    <div class="counter-separator">:</div>
+                    <div class="counter-item">
+                        <span class="counter-value" id="counterHours">0</span>
+                        <span class="counter-unit">Hours</span>
+                    </div>
+                    <div class="counter-separator">:</div>
+                    <div class="counter-item">
+                        <span class="counter-value" id="counterMinutes">0</span>
+                        <span class="counter-unit">Minutes</span>
+                    </div>
+                </div>
+                <div class="counter-hearts">💕💕💕</div>
             </div>
-            <p class="hero-subtitle">"Every love story is beautiful, but ours is my favorite"</p>
         </div>
+
         <div class="scroll-indicator">
-            <span style="font-size: 30px;">👇</span>
-            <br>
-            <span style="color: var(--deep-rose);">Scroll Down</span>
-        </div>
-    </section>
-
-    <!-- Timeline Section -->
-    <section class="timeline-section" id="timeline">
-        <h2 class="section-title">Our Journey Together</h2>
-        <div class="timeline">
-            <!-- Timeline Item 1 -->
-            <div class="timeline-item stagger-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">June 14, 2022</div> <!-- Customize Date -->
-                    <h3 class="timeline-title">The Day We Met 💫</h3>
-                    <p class="timeline-description">
-                        It was a sunny afternoon when our eyes met for the first time... a moment etched in my heart forever.
-                    </p>
-                </div>
-            </div>
-            <!-- Timeline Item 2 -->
-            <div class="timeline-item stagger-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">July 20, 2022</div> <!-- Customize Date -->
-                    <h3 class="timeline-title">Our First Date 🌹</h3>
-                    <p class="timeline-description">
-                        That little coffee shop became our special place where our story truly began. Every sip, every word, a treasure.
-                    </p>
-                </div>
-            </div>
-            <!-- Timeline Item 3 -->
-            <div class="timeline-item stagger-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">December 25, 2022</div> <!-- Customize Date -->
-                    <h3 class="timeline-title">First Christmas Together 🎄</h3>
-                    <p class="timeline-description">
-                        Our first of many magical holidays, filled with laughter, warmth, and the joy of being together.
-                    </p>
-                </div>
-            </div>
-            <!-- Add more timeline items as needed -->
-            <div class="timeline-item stagger-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">February 14, 2023</div> <!-- Customize Date -->
-                    <h3 class="timeline-title">First Valentine's Day ❤️</h3>
-                    <p class="timeline-description">
-                        A day of sweet surprises and reaffirming our beautiful bond.
-                    </p>
-                </div>
-            </div>
-            <div class="timeline-item stagger-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">May 5, 2023</div> <!-- Customize Date -->
-                    <h3 class="timeline-title">Our First Adventure Abroad ✈️</h3>
-                    <p class="timeline-description">
-                        Exploring new cities hand-in-hand, making memories that span continents.
-                    </p>
-                </div>
-            </div>
-            <div class="timeline-item stagger-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">Today</div> <!-- Customize Date -->
-                    <h3 class="timeline-title">And Our Story Continues...</h3>
-                    <p class="timeline-description">
-                        Every day is a new page, a new adventure, and a new reason to fall deeper in love with you.
-                    </p>
-                </div>
+            <span class="scroll-text">Scroll to explore</span>
+            <div class="scroll-arrow">
+                <span></span>
+                <span></span>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
+    <!-- Our Story Timeline -->
+    <section class="story-section" id="story">
+        <div class="section-header">
+            <span class="section-badge">📖</span>
+            <h2 class="section-title">Our Journey Together</h2>
+            <p class="section-subtitle">Every moment with you is a treasure</p>
+        </div>
+
+        <div class="timeline" id="timeline">
+            <!-- Timeline items will be loaded dynamically -->
+            <div class="timeline-placeholder">
+                <div class="placeholder-icon">📅</div>
+                <p>Your beautiful timeline will appear here</p>
+                <small>Add photos with dates to create your story</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
     <section class="gallery-section" id="gallery">
-        <h2 class="section-title">Our Beautiful Memories</h2>
-        <div class="gallery-grid">
-            <!-- Customize with your images in assets/images/ -->
-            <div class="gallery-item photo-reveal stagger-item">
-                <img src="assets/images/photo1.jpg" alt="Memory 1">
-                <div class="gallery-overlay">
-                    <p>Our first trip together</p>
-                </div>
-            </div>
-            <div class="gallery-item photo-reveal stagger-item">
-                <img src="assets/images/photo2.jpg" alt="Memory 2">
-                <div class="gallery-overlay">
-                    <p>That spontaneous adventure</p>
-                </div>
-            </div>
-            <div class="gallery-item photo-reveal stagger-item">
-                <img src="assets/images/photo3.jpg" alt="Memory 3">
-                <div class="gallery-overlay">
-                    <p>Sunday morning smiles</p>
-                </div>
-            </div>
-            <div class="gallery-item photo-reveal stagger-item">
-                <img src="assets/images/photo4.jpg" alt="Memory 4">
-                <div class="gallery-overlay">
-                    <p>Dancing in the rain</p>
-                </div>
-            </div>
-            <div class="gallery-item photo-reveal stagger-item">
-                <img src="assets/images/photo5.jpg" alt="Memory 5">
-                <div class="gallery-overlay">
-                    <p>Sunset by the beach</p>
-                </div>
-            </div>
-            <div class="gallery-item photo-reveal stagger-item">
-                <img src="assets/images/photo6.jpg" alt="Memory 6">
-                <div class="gallery-overlay">
-                    <p>Cozy movie nights</p>
-                </div>
-            </div>
-            <!-- Add more images -->
-            <div class="gallery-item photo-reveal stagger-item">
-                <img src="assets/images/photo7.jpg" alt="Memory 7">
-                <div class="gallery-overlay">
-                    <p>Laughing till our stomachs hurt</p>
-                </div>
-            </div>
-            <div class="gallery-item photo-reveal stagger-item">
-                <img src="assets/images/photo8.jpg" alt="Memory 8">
-                <div class="gallery-overlay">
-                    <p>Just a perfect ordinary day</p>
-                </div>
+        <div class="section-header">
+            <span class="section-badge">📸</span>
+            <h2 class="section-title">Our Beautiful Memories</h2>
+            <p class="section-subtitle">Captured moments of our love</p>
+        </div>
+
+        <div class="gallery-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="recent">Recent</button>
+            <button class="filter-btn" data-filter="favorites">Favorites ❤️</button>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Photos will be loaded dynamically -->
+            <div class="gallery-placeholder">
+                <div class="placeholder-icon">📷</div>
+                <p>No photos yet!</p>
+                <a href="admin.html" class="placeholder-btn">Upload Photos</a>
             </div>
         </div>
     </section>
 
     <!-- Video Section -->
-    <section class="video-section" id="videos">
-        <h2 class="section-title">Our Video Memories 🎬</h2>
-        <div class="video-gallery">
-            <!-- Customize with your videos in assets/videos/ -->
-            <div class="video-card stagger-item" onclick="playVideo('assets/videos/video1.mp4', 'Our First Dance')">
-                <div class="video-thumbnail">
-                    <img src="assets/images/video_thumb1.jpg" alt="First Dance Thumbnail"> <!-- Create thumbnails -->
-                    <div class="play-overlay">
-                        <span class="play-icon">▶</span>
-                    </div>
-                </div>
-                <div class="video-info">
-                    <h3>Our First Dance</h3>
-                    <p>June 2022 • 2:30</p>
-                </div>
-            </div>
-            
-            <div class="video-card stagger-item" onclick="playVideo('assets/videos/video2.mp4', 'Beach Sunset')">
-                <div class="video-thumbnail">
-                    <img src="assets/images/video_thumb2.jpg" alt="Beach Sunset Thumbnail">
-                    <div class="play-overlay">
-                        <span class="play-icon">▶</span>
-                    </div>
-                </div>
-                <div class="video-info">
-                    <h3>Beach Sunset</h3>
-                    <p>August 2022 • 1:45</p>
-                </div>
-            </div>
+    <section class="videos-section" id="videos">
+        <div class="section-header light">
+            <span class="section-badge">🎬</span>
+            <h2 class="section-title">Video Memories</h2>
+            <p class="section-subtitle">Relive our special moments</p>
+        </div>
 
-            <!-- Add more video cards as needed -->
-            <div class="video-card stagger-item" onclick="playVideo('assets/videos/video3.mp4', 'Our Anniversary')">
-                <div class="video-thumbnail">
-                    <img src="assets/images/video_thumb3.jpg" alt="Anniversary Thumbnail">
-                    <div class="play-overlay">
-                        <span class="play-icon">▶</span>
-                    </div>
-                </div>
-                <div class="video-info">
-                    <h3>Our Anniversary</h3>
-                    <p>June 2023 • 3:00</p>
-                </div>
+        <div class="videos-grid" id="videosGrid">
+            <!-- Videos will be loaded dynamically -->
+            <div class="video-placeholder">
+                <div class="placeholder-icon">🎥</div>
+                <p>No videos yet!</p>
+                <a href="admin.html" class="placeholder-btn">Upload Videos</a>
             </div>
         </div>
     </section>
 
-    <!-- Love Letter Section -->
-    <section class="letter-section" id="letter">
-        <h2 class="section-title">A Letter For You</h2>
-        <div class="envelope">
-            <div class="envelope-body"></div>
-            <div class="envelope-flap"></div>
+    <!-- Love Letters Section -->
+    <section class="letters-section" id="letters">
+        <div class="section-header">
+            <span class="section-badge">💌</span>
+            <h2 class="section-title">Love Notes</h2>
+            <p class="section-subtitle">Words from my heart to yours</p>
         </div>
-        <div class="love-letter romantic-glow">
-            <div class="letter-content">
-                My Dearest Love,
-                <br><br>
-                Every moment with you feels like a beautiful dream I never want to wake up from. 
-                You are my sunshine on cloudy days, my calm in every storm, and my favorite 
-                adventure.
-                <br><br>
-                Thank you for being you. Thank you for loving me. Thank you for making every 
-                day brighter just by being in it.
-                <br><br>
-                Forever & Always,<br>
-                Your [Your Name] 💕
+
+        <div class="letters-container">
+            <div class="main-letter">
+                <div class="letter-envelope" id="letterEnvelope">
+                    <div class="envelope-back"></div>
+                    <div class="envelope-front">
+                        <div class="envelope-heart">💌</div>
+                        <p class="envelope-text">Click to open</p>
+                    </div>
+                    <div class="envelope-flap"></div>
+                </div>
+
+                <div class="letter-paper" id="letterPaper">
+                    <div class="letter-content">
+                        <p class="letter-greeting">My Dearest Love,</p>
+                        <div class="letter-body" id="letterBody">
+                            <p>Every moment with you feels like a beautiful dream I never want to wake up from. You are my sunshine on cloudy days, my calm in every storm, and my favorite adventure.</p>
+                            <p>This website is a small token of my love — a place where our memories live forever, where every photo tells our story, and every video captures our laughter.</p>
+                            <p>Thank you for being you. Thank you for loving me. Thank you for making every day brighter just by being in it.</p>
+                        </div>
+                        <p class="letter-signature">
+                            Forever & Always,<br>
+                            <span id="letterSignature">Your Love</span> 💕
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Love Notes -->
+            <div class="love-notes-carousel" id="loveNotesCarousel">
+                <!-- Dynamic love notes -->
             </div>
         </div>
     </section>
+
+    <!-- Special Dates Section -->
+    <section class="special-dates-section" id="specialDates">
+        <div class="section-header light">
+            <span class="section-badge">🎉</span>
+            <h2 class="section-title">Special Days</h2>
+            <p class="section-subtitle">Counting down to our celebrations</p>
+        </div>
+
+        <div class="dates-grid" id="datesGrid">
+            <!-- Special dates will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-hearts">💕💖💕</div>
+            <p class="footer-text">Made with all my love, for you</p>
+            <p class="footer-stats" id="footerStats"></p>
+        </div>
+    </footer>
 
     <!-- Music Player -->
-    <div class="music-player">
-        <button class="play-btn" onclick="toggleMusic()">▶️</button>
-        <div class="song-info">
-            <div class="song-title">Our Song Title</div> <!-- Customize -->
-            <div class="song-artist">Our Artist</div> <!-- Customize -->
+    <div class="music-player" id="musicPlayer">
+        <button class="music-btn" id="musicBtn">
+            <span class="music-icon">🎵</span>
+        </button>
+        <div class="music-info">
+            <div class="music-title" id="musicTitle">Our Song</div>
+            <div class="music-artist" id="musicArtist">Playing</div>
+        </div>
+        <div class="music-visualizer" id="musicVisualizer">
+            <span></span><span></span><span></span><span></span><span></span>
         </div>
     </div>
 
     <audio id="bgMusic" loop>
-        <source src="assets/audio/your-song.mp3" type="audio/mpeg"> <!-- Customize with your song -->
-        Your browser does not support the audio element.
+        <source src="assets/audio/song.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Video Modal (Hidden by default) -->
-    <div id="video-modal" class="video-modal">
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-overlay"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <button class="lightbox-prev">❮</button>
+            <button class="lightbox-next">❯</button>
+            <div class="lightbox-image-container">
+                <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            </div>
+            <div class="lightbox-info">
+                <p class="lightbox-caption" id="lightboxCaption"></p>
+                <p class="lightbox-date" id="lightboxDate"></p>
+                <button class="lightbox-favorite" id="lightboxFavorite">🤍</button>
+            </div>
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
         <div class="video-modal-content">
-            <button class="video-close" onclick="closeVideo()">&times;</button>
-            <h3 class="video-title"></h3>
-            <video id="main-video" controls playsinline> <!-- playsinline for iOS autoplay -->
+            <button class="video-modal-close">&times;</button>
+            <h3 class="video-modal-title" id="videoModalTitle"></h3>
+            <video id="videoPlayer" controls playsinline>
                 <source src="" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
         </div>
     </div>
 
-    <!-- External JavaScript Files -->
-    <script src="js/security.js"></script>
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/effects.js"></script>
     <script src="js/gallery.js"></script>
-    <script src="js/animations.js"></script> <!-- Contains the "Surprises" logic -->
-    
-    <script>
-        // Calculate days together
-        function calculateDaysTogether() {
-            const startDate = new Date('2022-06-14T00:00:00'); // Customize: YYYY-MM-DD
-            const today = new Date();
-            const diffTime = Math.abs(today.getTime() - startDate.getTime());
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            
-            document.getElementById('daysTogether').textContent = diffDays.toLocaleString();
-        }
-        
-        calculateDaysTogether();
-
-        // Music toggle
-        let isPlaying = false;
-        function toggleMusic() {
-            const audio = document.getElementById('bgMusic');
-            const btn = document.querySelector('.play-btn');
-            
-            if (isPlaying) {
-                audio.pause();
-                btn.textContent = '▶️';
-            } else {
-                audio.play();
-                btn.textContent = '⏸️';
-            }
-            isPlaying = !isPlaying;
-        }
-
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
-        }
-
-        // Close mobile menu on link click
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                const navLinks = document.querySelector('.nav-links');
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
-            });
-        });
-
-        // --- Video Player Functions (Internal for simplicity, but could be in a separate JS) ---
-        function playVideo(src, title) {
-            const modal = document.getElementById('video-modal');
-            const video = document.getElementById('main-video');
-            const titleEl = modal.querySelector('.video-title');
-            
-            video.src = src;
-            titleEl.textContent = title;
-            modal.classList.add('active');
-            video.play();
-            
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeVideo() {
-            const modal = document.getElementById('video-modal');
-            const video = document.getElementById('main-video');
-            
-            video.pause();
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        // Close video modal on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && document.getElementById('video-modal').classList.contains('active')) {
-                closeVideo();
-            }
-        });
-        // --- End Video Player Functions ---
-
-        // Intersection Observer for stagger-item animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('stagger-animate'); // Add a class to trigger the animation
-                    observer.unobserve(entry.target); // Stop observing once animated
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.stagger-item').forEach(item => {
-            observer.observe(item);
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>

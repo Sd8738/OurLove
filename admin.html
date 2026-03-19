@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 Admin - Manage Our Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Loading -->
+    <div class="admin-loading" id="adminLoading">
+        <div class="loading-spinner"></div>
+        <p>Loading admin panel...</p>
+    </div>
+
+    <!-- Admin Container -->
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h1>💕 Love Admin</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="sidebar-link active" data-section="dashboard">
+                    <span class="link-icon">📊</span>
+                    <span class="link-text">Dashboard</span>
+                </a>
+                <a href="#upload" class="sidebar-link" data-section="upload">
+                    <span class="link-icon">📤</span>
+                    <span class="link-text">Upload Media</span>
+                </a>
+                <a href="#photos" class="sidebar-link" data-section="photos">
+                    <span class="link-icon">📷</span>
+                    <span class="link-text">Photos</span>
+                </a>
+                <a href="#videos" class="sidebar-link" data-section="videos">
+                    <span class="link-icon">🎬</span>
+                    <span class="link-text">Videos</span>
+                </a>
+                <a href="#timeline" class="sidebar-link" data-section="timeline">
+                    <span class="link-icon">📅</span>
+                    <span class="link-text">Timeline</span>
+                </a>
+                <a href="#settings" class="sidebar-link" data-section="settings">
+                    <span class="link-icon">⚙️</span>
+                    <span class="link-text">Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="home.html" class="view-site-btn">
+                    👀 View Website
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section class="admin-section active" id="dashboard-section">
+                <div class="section-header">
+                    <h2>Dashboard</h2>
+                    <p>Overview of your love story</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📷</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statPhotos">0</span>
+                            <span class="stat-label">Photos</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎬</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statVideos">0</span>
+                            <span class="stat-label">Videos</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">❤️</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statFavorites">0</span>
+                            <span class="stat-label">Favorites</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="statDays">0</span>
+                            <span class="stat-label">Days Together</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-uploads">
+                    <h3>Recent Uploads</h3>
+                    <div class="recent-grid" id="recentGrid">
+                        <p class="empty-message">No uploads yet. Start adding memories!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload Section -->
+            <section class="admin-section" id="upload-section">
+                <div class="section-header">
+                    <h2>Upload Media</h2>
+                    <p>Add new photos and videos to your love story</p>
+                </div>
+
+                <div class="upload-tabs">
+                    <button class="upload-tab active" data-type="photos">📷 Photos</button>
+                    <button class="upload-tab" data-type="videos">🎬 Videos</button>
+                </div>
+
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-dropzone" id="dropzone">
+                        <div class="dropzone-content">
+                            <span class="dropzone-icon">📁</span>
+                            <h3>Drag & Drop Files Here</h3>
+                            <p>or click to browse</p>
+                            <span class="dropzone-hint">Supports: JPG, PNG, GIF, MP4, WebM</span>
+                        </div>
+                        <input type="file" id="fileInput" multiple accept="image/*,video/*" hidden>
+                    </div>
+                </div>
+
+                <div class="upload-preview" id="uploadPreview">
+                    <h3>Selected Files</h3>
+                    <div class="preview-grid" id="previewGrid"></div>
+                    <div class="upload-actions">
+                        <button class="btn btn-secondary" onclick="clearUploadPreview()">Clear All</button>
+                        <button class="btn btn-primary" onclick="uploadAllFiles()">
+                            <span class="btn-icon">⬆️</span>
+                            Upload All
+                        </button>
+                    </div>
+                </div>
+
+                <div class="upload-form" id="uploadForm" style="display: none;">
+                    <h3>Add Details</h3>
+                    <div class="form-group">
+                        <label>Caption</label>
+                        <input type="text" id="mediaCaption" placeholder="Describe this memory...">
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="mediaDate">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="mediaFavorite">
+                            Mark as Favorite ❤️
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Photos Section -->
+            <section class="admin-section" id="photos-section">
+                <div class="section-header">
+                    <h2>Manage Photos</h2>
+                    <p>View and organize your photos</p>
+                </div>
+
+                <div class="media-toolbar">
+                    <div class="search-box">
+                        <input type="text" id="photoSearch" placeholder="Search photos...">
+                    </div>
+                    <div class="toolbar-actions">
+                        <button class="btn btn-danger" id="deleteSelectedPhotos" disabled>
+                            🗑️ Delete Selected
+                        </button>
+                    </div>
+                </div>
+
+                <div class="photos-grid admin-grid" id="adminPhotosGrid">
+                    <!-- Photos loaded dynamically -->
+                </div>
+            </section>
+
+            <!-- Videos Section -->
+            <section class="admin-section" id="videos-section">
+                <div class="section-header">
+                    <h2>Manage Videos</h2>
+                    <p>View and organize your videos</p>
+                </div>
+
+                <div class="videos-grid admin-grid" id="adminVideosGrid">
+                    <!-- Videos loaded dynamically -->
+                </div>
+            </section>
+
+            <!-- Timeline Section -->
+            <section class="admin-section" id="timeline-section">
+                <div class="section-header">
+                    <h2>Timeline Events</h2>
+                    <p>Add special moments to your timeline</p>
+                </div>
+
+                <button class="btn btn-primary" onclick="showAddEventModal()">
+                    ➕ Add Event
+                </button>
+
+                <div class="timeline-list" id="timelineList">
+                    <!-- Events loaded dynamically -->
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section class="admin-section" id="settings-section">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                    <p>Customize your love story</p>
+                </div>
+
+                <div class="settings-form">
+                    <div class="settings-group">
+                        <h3>💕 Couple Details</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Your Name</label>
+                                <input type="text" id="settingYourName" placeholder="Your name">
+                            </div>
+                            <div class="form-group">
+                                <label>Partner's Name</label>
+                                <input type="text" id="settingPartnerName" placeholder="Partner's name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>📅 Important Date</h3>
+                        <div class="form-group">
+                            <label>When did your love story begin?</label>
+                            <input type="date" id="settingStartDate">
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>🔐 Password</h3>
+                        <div class="form-group">
+                            <label>Website Password</label>
+                            <input type="text" id="settingPassword" placeholder="Sumakshu17042024">
+                            <small>This is used to access the main website</small>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>💬 Hero Quote</h3>
+                        <div class="form-group">
+                            <label>Quote for the homepage</label>
+                            <textarea id="settingQuote" rows="3" placeholder="Enter a romantic quote..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>💌 Love Letter</h3>
+                        <div class="form-group">
+                            <label>Your love letter content</label>
+                            <textarea id="settingLetter" rows="8" placeholder="Write your love letter..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>🎉 Special Dates</h3>
+                        <div id="specialDatesSettings">
+                            <!-- Dynamic special dates -->
+                        </div>
+                        <button class="btn btn-secondary" onclick="addSpecialDate()">
+                            ➕ Add Special Date
+                        </button>
+                    </div>
+
+                    <div class="settings-actions">
+                        <button class="btn btn-primary btn-lg" onclick="saveSettings()">
+                            💾 Save All Settings
+                        </button>
+                    </div>
+
+                    <div class="settings-group danger-zone">
+                        <h3>⚠️ Danger Zone</h3>
+                        <button class="btn btn-danger" onclick="confirmClearAll()">
+                            🗑️ Clear All Data
+                        </button>
+                        <p class="warning-text">This will delete all photos, videos, and settings. This cannot be undone!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Event Modal -->
+    <div class="modal" id="addEventModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Timeline Event</h3>
+                <button class="modal-close" onclick="closeModal('addEventModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Event Title</label>
+                    <input type="text" id="eventTitle" placeholder="e.g., Our First Date">
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="eventDate">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="eventDescription" rows="3" placeholder="What made this day special?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Emoji Icon</label>
+                    <input type="text" id="eventIcon" placeholder="💕" maxlength="2">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('addEventModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveTimelineEvent()">Save Event</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/upload.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

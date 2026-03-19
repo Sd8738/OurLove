@@ -3,149 +3,472 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 A Special Place for Us</title>
-    <!-- We'll keep the styling inline here for this simple, standalone password page -->
+    <title>💕 A Special Place For Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #F8E1E7 0%, #E8DFF5 100%);
+            font-family: 'Lato', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-animation .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatHeart 15s infinite linear;
+            opacity: 0;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+                transform: translateY(90vh) rotate(45deg) scale(1);
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Aurora Effect */
+        .aurora {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 107, 157, 0.1) 0%,
+                rgba(255, 154, 158, 0.1) 25%,
+                rgba(250, 208, 196, 0.1) 50%,
+                rgba(255, 154, 158, 0.1) 75%,
+                rgba(255, 107, 157, 0.1) 100%
+            );
+            background-size: 400% 400%;
+            animation: aurora 15s ease infinite;
+        }
+
+        @keyframes aurora {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Main Container */
+        .login-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Lato', sans-serif; /* Fallback, but linking Google Fonts is better */
-            overflow: hidden; /* Prevent scroll on password page */
-        }
-        
-        /* Basic font linking for a better look */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;700&display=swap');
-        
-        h1, .subtitle, .hint, .error-message, .unlock-btn, .password-input {
-            font-family: 'Lato', sans-serif; /* Default to Lato */
-        }
-        
-        h1 {
-            font-family: 'Playfair Display', serif; /* Override for heading */
+            padding: 20px;
         }
 
-        .password-container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 50px 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(192, 77, 110, 0.2);
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 60px 50px;
+            max-width: 450px;
+            width: 100%;
             text-align: center;
-            max-width: 400px;
-            width: 90%;
-            animation: fadeIn 1s ease-out;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                inset 0 0 60px rgba(255, 255, 255, 0.05);
+            animation: cardAppear 1s ease-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
-        
-        .heart-icon {
-            font-size: 60px;
+
+        .love-icon {
+            font-size: 80px;
             margin-bottom: 20px;
-            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+            animation: heartPulse 2s infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.5));
         }
-        
-        @keyframes heartbeat {
+
+        @keyframes heartPulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.05); }
         }
-        
+
         h1 {
-            color: #C04D6E;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #fff;
             margin-bottom: 10px;
-            font-size: 28px;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-        
-        .subtitle {
-            color: #888;
-            margin-bottom: 30px;
-            font-style: italic;
+
+        .tagline {
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            color: rgba(255, 182, 193, 0.9);
+            margin-bottom: 40px;
         }
-        
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
         .password-input {
             width: 100%;
-            padding: 15px 20px;
-            border: 2px solid #F8E1E7;
-            border-radius: 50px;
+            padding: 18px 25px;
             font-size: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
             text-align: center;
+            letter-spacing: 3px;
+            transition: all 0.4s ease;
             outline: none;
-            transition: all 0.3s ease;
-        }
-        
-        .password-input:focus {
-            border-color: #C04D6E;
-            box-shadow: 0 0 20px rgba(192, 77, 110, 0.2);
-        }
-        
-        .unlock-btn {
-            background: linear-gradient(135deg, #C04D6E 0%, #E8789A 100%);
-            color: white;
-            border: none;
-            padding: 15px 50px;
-            border-radius: 50px;
-            font-size: 16px;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .unlock-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(192, 77, 110, 0.4);
-        }
-        
-        .hint {
-            margin-top: 20px;
-            font-size: 13px;
-            color: #aaa;
-        }
-        
-        .error-message {
-            color: #ff6b6b;
-            margin-top: 15px;
-            display: none;
         }
 
-        /* Shake animation for incorrect password */
+        .password-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .password-input:focus {
+            border-color: rgba(255, 107, 157, 0.6);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 30px rgba(255, 107, 157, 0.2);
+        }
+
+        .unlock-btn {
+            width: 100%;
+            padding: 18px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #ff6b9d 100%);
+            background-size: 200% 200%;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .unlock-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .unlock-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+            background-position: 100% 0;
+        }
+
+        .unlock-btn:hover::before {
+            left: 100%;
+        }
+
+        .unlock-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .hint {
+            margin-top: 30px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hint-icon {
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+        .error-msg {
+            color: #ff6b6b;
+            margin-top: 20px;
+            font-size: 14px;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-            20%, 40%, 60%, 80% { transform: translateX(10px); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        .admin-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 12px;
+            text-decoration: none;
+            transition: color 0.3s;
+            z-index: 100;
+        }
+
+        .admin-link:hover {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            text-align: center;
+        }
+
+        .loader-heart {
+            font-size: 60px;
+            animation: heartPulse 1s infinite;
+        }
+
+        .loader-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .tagline {
+                font-size: 18px;
+            }
+
+            .love-icon {
+                font-size: 60px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="password-container">
-        <div class="heart-icon">💕</div>
-        <h1>Welcome, My Love</h1>
-        <p class="subtitle">Enter our special password</p>
-        
-        <input type="password" 
-               class="password-input" 
-               id="passwordInput" 
-               placeholder="Enter password..."
-               onkeypress="handleKeyPress(event)">
-        
-        <button class="unlock-btn" onclick="checkPassword()">
-            Unlock Our Story ✨
-        </button>
-        
-        <p class="hint">Hint: The date we first met 💑 (DDMMYYYY)</p>
-        <p class="error-message" id="errorMsg">That's not it, try again! 💔</p>
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader">
+            <div class="loader-heart">💕</div>
+            <div class="loader-text">Loading our love story...</div>
+        </div>
     </div>
 
-    <!-- Password handling script -->
-    <script src="js/password.js"></script>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="aurora"></div>
+        <div class="stars" id="stars"></div>
+        <div class="floating-hearts" id="floatingHearts"></div>
+    </div>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="login-card">
+            <div class="love-icon">💖</div>
+            <h1>Welcome My Love</h1>
+            <p class="tagline">Enter our secret password</p>
+            
+            <div class="input-group">
+                <input 
+                    type="password" 
+                    class="password-input" 
+                    id="passwordInput"
+                    placeholder="Enter password..."
+                    autocomplete="off"
+                >
+            </div>
+            
+            <button class="unlock-btn" onclick="checkPassword()">
+                ✨ Unlock Our Story ✨
+            </button>
+            
+            <p class="hint">
+                <span class="hint-icon">💡</span>
+                Hint: The day we first met (DDMMYYYY)
+            </p>
+            
+            <p class="error-msg" id="errorMsg">
+                That's not quite right, my love! Try again 💔
+            </p>
+        </div>
+    </div>
+
+    <a href="admin.html" class="admin-link">Admin</a>
+
+    <script src="js/storage.js"></script>
+    <script>
+        // Generate stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Generate floating hearts
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floatingHearts');
+            const hearts = ['💕', '💖', '💗', '💝', '❤️', '💘', '💓', '💞'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Check password
+        async function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            // Get stored config or use default
+            const config = await LoveStorage.getConfig();
+            const correctPassword = config?.password || '17042024';
+            
+            if (input === correctPassword) {
+                document.body.style.transition = 'opacity 0.8s ease';
+                document.body.style.opacity = '0';
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 800);
+            } else {
+                errorMsg.style.display = 'block';
+                document.querySelector('.login-card').style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    document.querySelector('.login-card').style.animation = '';
+                }, 500);
+            }
+        }
+
+        // Enter key support
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            createFloatingHearts();
+            
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1500);
+        });
+    </script>
 </body>
 </html>
